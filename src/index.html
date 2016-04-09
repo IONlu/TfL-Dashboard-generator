@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="tfl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>TFL &middot; Dashboard generator</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #E5E6EA;
+            font-size: 1.5rem;
+            color: #484C58;
+        }
+        .well {
+            border: 1px solid #DEDFE2;
+            background-color: #FFFFFF;
+            border-radius: 0.3125em;
+        }
+        ul.list {
+            padding-left: 10px;
+            border-radius: 0.3125em;
+            border: 1px solid #D0D1D5;
+            padding: 0;
+        }
+        ul.list li {
+            border-bottom: 1px solid #DEDFE2;
+            list-style: none;
+            color: #484C58;
+            padding: 12px;
+        }
+        ul.list li:hover {
+            border-bottom: 1px solid #DEDFE2;
+            list-style: none;
+            color: #484C58;
+        }
+        .title {
+
+        }
+        .navbar {
+            margin-bottom: 40px;
+        }
+
+    </style>
+
+  </head>
+
+  <body  ng-controller="departures">
+
+      <!-- Fixed navbar -->
+     <nav class="navbar navbar-inverse">
+       <div class="container">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">Bootstrap theme</a>
+         </div>
+         <div id="navbar" class="navbar-collapse collapse">
+           <ul class="nav navbar-nav">
+             <li class="active"><a href="#">Home</a></li>
+             <li><a href="#about">About</a></li>
+             <li><a href="#contact">Contact</a></li>
+             <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                 <li><a href="#">Action</a></li>
+                 <li><a href="#">Another action</a></li>
+                 <li><a href="#">Something else here</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown-header">Nav header</li>
+                 <li><a href="#">Separated link</a></li>
+                 <li><a href="#">One more separated link</a></li>
+               </ul>
+             </li>
+           </ul>
+         </div><!--/.nav-collapse -->
+       </div>
+     </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 well">
+                <div class="title">Search</div>
+                <input type='text' class="form-control"
+                    placeholder='Search for a departure station...'
+                    ng-model='searchString'
+                    ng-model-options='{ debounce: 400 }'
+                    ng-change='search()' />
+            </div>
+            <div class="col-md-6 well">
+                <div class="title">Stations</div>
+                <ul class="list">
+                    <li ng-repeat="station in stations">{{station.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+
+    <script src="tfl.js"></script>
+
+  </body>
+</html>
