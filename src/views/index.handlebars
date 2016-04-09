@@ -31,14 +31,27 @@
                       ng-model='searchString'
                       ng-model-options='{ debounce: 400 }'
                       ng-change='search()' />
+
+                  <div class="title">Define background color</div>
+                  <input type='text'
+                      placeholder='Search for a departure station...'
+                      ng-model='searchString'
+                      ng-model-options='{ debounce: 400 }'
+                      ng-change='search()' />
               </div>
           </div>
           <div class="col-md-6">
-              <div class="well stationsList">
+              <div class="well stationsList" ng-hide="!!!stations.length">
                   <div class="title">Select a station</div>
-                  <ul class="list" ng-hide="!!!stations.length">
+                  <ul class="list">
                       <li ng-repeat="station in stations" ng-click="selectStation(station.id)">{[{station.name}]}</li>
                   </ul>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="well">
+                  <div class="title">Select a station</div>
+                  <pre>{[{departures}]}</pre>
               </div>
           </div>
       </div>

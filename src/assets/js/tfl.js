@@ -14,7 +14,17 @@ angular.module('tfl', [])
     };
 
     $scope.selectStation = function(stationId){
-        console.log(stationId);
+        selectStation(stationId).then( function(res) {
+            $scope.departures = JSON.stringify(res);
+        });
+    }
+
+    function selectStation(stationId){
+        return $http.get(
+            'https://api.tfl.lu/departures/' + stationId
+        ).then( function ( response ) {
+            return response.data;
+        });
     }
 
     function lookUpStation(search) {
