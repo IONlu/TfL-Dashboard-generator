@@ -14,9 +14,7 @@
        </div>
        <div id="navbar" class="navbar-collapse collapse">
          <ul class="nav navbar-nav">
-           <li class="active"><a href="#">Home</a></li>
-           <li><a href="#about">About</a></li>
-           <li><a href="#contact">Contact</a></li>
+           <li class="active"><a href="/">Generator</a></li>
          </ul>
        </div><!--/.nav-collapse -->
      </div>
@@ -27,8 +25,8 @@
       <div class="row">
           <div class="col-md-6">
               <div class="well">
-                  <div class="title">Search</div>
-                  <input type='text' class="form-control"
+                  <div class="title">What station do you want to display?</div>
+                  <input type='text'
                       placeholder='Search for a departure station...'
                       ng-model='searchString'
                       ng-model-options='{ debounce: 400 }'
@@ -36,9 +34,9 @@
               </div>
           </div>
           <div class="col-md-6">
-              <div class="well">
-                  <div class="title">Stations</div>
-                  <ul class="list">
+              <div class="well stationsList">
+                  <div class="title">Select a station</div>
+                  <ul class="list" ng-hide="!!!stations.length">
                       <li ng-repeat="station in stations" ng-click="selectStation(station.id)">{[{station.name}]}</li>
                   </ul>
               </div>
@@ -48,7 +46,7 @@
 
    <footer class="footer">
     <div class="container">
-      <span class="text-muted">CC0 ION Group</span>
+      <span class="text-muted">ION Group 2016</span>
     </div>
    </footer>
 
