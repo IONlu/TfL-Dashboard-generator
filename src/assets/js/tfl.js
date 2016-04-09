@@ -4,7 +4,14 @@ angular.module('tfl', [])
 })
 .controller('departures', function( $scope, $http, $q ) {
 
+    io.sails.url = 'https://api.tfl.lu';
+    io.sails.useCORSRouteToGetCookie = false;
+
     $scope.stations = [];
+
+    var departuresObject = {};
+
+    $scope.dep = ['test','daniel','thierry'];
 
     $scope.search = function(){
         lookUpStation($scope.searchString).then( function(res) {
@@ -14,17 +21,7 @@ angular.module('tfl', [])
     };
 
     $scope.selectStation = function(stationId){
-        selectStation(stationId).then( function(res) {
-            $scope.departures = JSON.stringify(res);
-        });
-    }
-
-    function selectStation(stationId){
-        return $http.get(
-            'https://api.tfl.lu/departures/' + stationId
-        ).then( function ( response ) {
-            return response.data;
-        });
+        selectStation(stationId);
     }
 
     function lookUpStation(search) {
@@ -38,6 +35,50 @@ angular.module('tfl', [])
         ).then( function ( response ) {
             return response.data;
         });
+    }
+
+    function selectStation(stationId){
+
+        io.socket.on('update', function gotUpdate (data) {
+            angular.forEach(data, function(value, key) {
+
+                console.log(value.event);
+
+                switch (value.event) {
+                    case 'new':
+                        departuresObject[key] = value;
+                        break;
+                    case 'update':
+                        departuresObject[key] = value;
+                        break;
+                    case 'delete':
+                        delete departuresObject[key];
+                        break;
+                }
+
+                console.log(value);
+
+                /*var newDepartures = [];
+
+                for (var departure in departuresObject) {
+                    if (departuresObject.hasOwnProperty(key)) {
+                        newDepartures.push(departuresObject[departure]);
+                    }
+                }
+
+                $scope.departuresList = newDepartures;
+
+                console.log($scope.departuresList);*/
+
+                $scope.dep.push(value.destination);
+
+            });
+        });
+
+        io.socket.get('/departures/live/' + stationId, function gotResponse(body, response) {
+            console.log('Server responded with status code ' + response.statusCode + ' and data: ', body);
+        });
+
     }
 
 });

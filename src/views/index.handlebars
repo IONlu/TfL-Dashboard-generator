@@ -31,13 +31,6 @@
                       ng-model='searchString'
                       ng-model-options='{ debounce: 400 }'
                       ng-change='search()' />
-
-                  <div class="title">Define background color</div>
-                  <input type='text'
-                      placeholder='Search for a departure station...'
-                      ng-model='searchString'
-                      ng-model-options='{ debounce: 400 }'
-                      ng-change='search()' />
               </div>
           </div>
           <div class="col-md-6">
@@ -50,8 +43,13 @@
           </div>
           <div class="col-md-12">
               <div class="well">
-                  <div class="title">Select a station</div>
-                  <pre>{[{departures}]}</pre>
+                  <div class="title">Dashboard</div>
+
+                  {[{dep}]}
+
+                  <ul>
+                      <li ng-repeat="departure in departuresList">{[{departure}]}</li>
+                  </ul>
               </div>
           </div>
       </div>
