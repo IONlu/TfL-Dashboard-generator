@@ -12,10 +12,12 @@
 
     <title>TFL &middot; Dashboard generator</title>
 
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <style>
         body {
+            font-family: 'Roboto', sans-serif;
             background-color: #E5E6EA;
             font-size: 1.5rem;
             color: #484C58;
@@ -37,16 +39,43 @@
             color: #484C58;
             padding: 12px;
         }
+        ul.list li:last-child {
+            border: none;
+        }
         ul.list li:hover {
             border-bottom: 1px solid #DEDFE2;
             list-style: none;
             color: #484C58;
         }
         .title {
-
+            font-size: 1.4em;
+            font-weight: 800;
+            text-transform: uppercase;
         }
         .navbar {
             margin-bottom: 40px;
+            border-radius: 0;
+            min-height: 60px;
+            padding: 0;
+            border: none;
+        }
+        .navbar-brand {
+            padding: 7px 15px 4px;
+            height: 60px;
+        }
+        .navbar-brand img {
+            height: 100%;
+        }
+        .navbar-inverse {
+            background-color: #484C58;
+            border-color: #484C58;
+        }
+        .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+            color: #fff;
+            background-color: #13bcff;
+        }
+        .navbar-nav>li>a {
+            line-height: 30px;
         }
 
     </style>
@@ -65,25 +94,13 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">Bootstrap theme</a>
+           <a class="navbar-brand" href="#"><img src="logo.svg" /></a>
          </div>
          <div id="navbar" class="navbar-collapse collapse">
            <ul class="nav navbar-nav">
              <li class="active"><a href="#">Home</a></li>
              <li><a href="#about">About</a></li>
              <li><a href="#contact">Contact</a></li>
-             <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-               <ul class="dropdown-menu">
-                 <li><a href="#">Action</a></li>
-                 <li><a href="#">Another action</a></li>
-                 <li><a href="#">Something else here</a></li>
-                 <li role="separator" class="divider"></li>
-                 <li class="dropdown-header">Nav header</li>
-                 <li><a href="#">Separated link</a></li>
-                 <li><a href="#">One more separated link</a></li>
-               </ul>
-             </li>
            </ul>
          </div><!--/.nav-collapse -->
        </div>
@@ -92,26 +109,30 @@
     <!-- Begin page content -->
     <div class="container">
         <div class="row">
-            <div class="col-md-6 well">
-                <div class="title">Search</div>
-                <input type='text' class="form-control"
-                    placeholder='Search for a departure station...'
-                    ng-model='searchString'
-                    ng-model-options='{ debounce: 400 }'
-                    ng-change='search()' />
+            <div class="col-md-6">
+                <div class="well">
+                    <div class="title">Search</div>
+                    <input type='text' class="form-control"
+                        placeholder='Search for a departure station...'
+                        ng-model='searchString'
+                        ng-model-options='{ debounce: 400 }'
+                        ng-change='search()' />
+                </div>
             </div>
-            <div class="col-md-6 well">
-                <div class="title">Stations</div>
-                <ul class="list">
-                    <li ng-repeat="station in stations">{{station.name}}</li>
-                </ul>
+            <div class="col-md-6">
+                <div class="well">
+                    <div class="title">Stations</div>
+                    <ul class="list">
+                        <li ng-repeat="station in stations" ng-click="selectStation(station.id)">{[{station.name}]}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">CC0 ION Group</span>
       </div>
     </footer>
 
