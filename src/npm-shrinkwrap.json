@@ -238,11 +238,6 @@
       "from": "ecc-jsbn@>=0.0.1 <1.0.0",
       "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz"
     },
-    "ejs": {
-      "version": "2.3.4",
-      "from": "ejs@2.3.4",
-      "resolved": "https://registry.npmjs.org/ejs/-/ejs-2.3.4.tgz"
-    },
     "errno": {
       "version": "0.1.4",
       "from": "errno@>=0.1.1 <0.2.0",
