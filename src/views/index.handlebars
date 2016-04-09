@@ -1,0 +1,55 @@
+<div ng-controller="departures">
+
+    <!-- Fixed navbar -->
+   <nav class="navbar navbar-inverse">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#"><img src="images/logo.svg" /></a>
+       </div>
+       <div id="navbar" class="navbar-collapse collapse">
+         <ul class="nav navbar-nav">
+           <li class="active"><a href="#">Home</a></li>
+           <li><a href="#about">About</a></li>
+           <li><a href="#contact">Contact</a></li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>
+
+   <!-- Begin page content -->
+   <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="well">
+                  <div class="title">Search</div>
+                  <input type='text' class="form-control"
+                      placeholder='Search for a departure station...'
+                      ng-model='searchString'
+                      ng-model-options='{ debounce: 400 }'
+                      ng-change='search()' />
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="well">
+                  <div class="title">Stations</div>
+                  <ul class="list">
+                      <li ng-repeat="station in stations" ng-click="selectStation(station.id)">{[{station.name}]}</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+   </div>
+
+   <footer class="footer">
+    <div class="container">
+      <span class="text-muted">CC0 ION Group</span>
+    </div>
+   </footer>
+
+</div>
