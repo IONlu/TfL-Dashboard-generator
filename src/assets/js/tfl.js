@@ -4,7 +4,14 @@ angular.module('tfl', [])
 })
 .controller('departures', function( $scope, $http, $q ) {
 
+    var tflSocket = io.sails.connect('https://api.tfl.lu');
+    io.sails.useCORSRouteToGetCookie = false;
+
     $scope.stations = [];
+
+    var departuresObject = {};
+
+    $scope.deps = [];
 
     $scope.search = function(){
         lookUpStation($scope.searchString).then( function(res) {
@@ -14,17 +21,7 @@ angular.module('tfl', [])
     };
 
     $scope.selectStation = function(stationId){
-        selectStation(stationId).then( function(res) {
-            $scope.departures = JSON.stringify(res);
-        });
-    }
-
-    function selectStation(stationId){
-        return $http.get(
-            'https://api.tfl.lu/departures/' + stationId
-        ).then( function ( response ) {
-            return response.data;
-        });
+        selectStation(stationId);
     }
 
     function lookUpStation(search) {
@@ -38,6 +35,41 @@ angular.module('tfl', [])
         ).then( function ( response ) {
             return response.data;
         });
+    }
+
+    tflSocket.on('update', function gotUpdate (data) {
+        angular.forEach(data, function(value, key) {
+
+            switch (value.event) {
+                case 'new':
+                    departuresObject[key] = value;
+                    break;
+                case 'update':
+                    departuresObject[key] = value;
+                    break;
+                case 'delete':
+                    delete departuresObject[key];
+                    break;
+            }
+
+            var newDepartures = [];
+
+            for (var departure in departuresObject) {
+                if (departuresObject.hasOwnProperty(key)) {
+                    newDepartures.push(departuresObject[departure]);
+                }
+            }
+
+            $scope.deps = newDepartures;
+        });
+    });
+
+    function selectStation(stationId){
+
+        tflSocket.get('/departures/live/' + stationId, function gotResponse(body, response) {
+            console.log(response, body);
+        });
+
     }
 
 });
