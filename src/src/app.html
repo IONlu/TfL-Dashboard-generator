@@ -1,0 +1,7 @@
+<template>
+    <require from="./station-list"></require>
+    <require from="./departure-list"></require>
+    <input value.bind="search" />
+    <station-list search.bind="search & debounce" change.delegate="change($event)"></station-list>
+    <departure-list station.bind="station"></departure-list>
+</template>

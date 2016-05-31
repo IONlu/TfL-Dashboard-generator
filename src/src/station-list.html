@@ -1,0 +1,5 @@
+<template>
+    <ul class="collection">
+        <li repeat.for="station of stations" class="collection-item" click.trigger=select(station.id)>${station.name}</li>
+    </ul>
+</template>
